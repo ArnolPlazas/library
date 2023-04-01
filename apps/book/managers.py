@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Q
 
 class AuthorManager(models.Manager):
     """
@@ -7,6 +8,6 @@ class AuthorManager(models.Manager):
 
     def look_for_author(self, kword):
         result =self.filter(
-            name__icontains = kword
-            )
+            Q(name__icontains = kword) | Q(last_name__icontains = kword)
+             )
         return result
