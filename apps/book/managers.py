@@ -17,3 +17,10 @@ class AuthorManager(models.Manager):
             name__icontains = kword
              ).exclude(Q(nationality__icontains = 'Argentino') | Q(nationality__icontains = 'Mexicano'))
         return result
+    
+    # def look_for_author3(self):
+    #     result =self.filter(
+    #         age__gt=40,
+    #         age__lt=60
+    #          ).order_by('last_name', age)
+    #     return result
