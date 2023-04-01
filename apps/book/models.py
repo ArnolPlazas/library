@@ -1,9 +1,14 @@
 from django.db import models
 
+# managers
+from .managers import AuthorManager
+
 class Author(models.Model):
     name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     nationality = models.CharField(max_length=30)
+
+    objects = AuthorManager()
 
     class Meta:
         verbose_name = ("Author")
@@ -11,6 +16,7 @@ class Author(models.Model):
 
     def __str__(self):
         return self.name + '-' + self.last_name
+
 
 
 class Category(models.Model):
