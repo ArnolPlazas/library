@@ -1,5 +1,10 @@
 <h1>Authors</h1>
 
+<form method="GET">{% csrf_token %}
+    <input type="text" id='kword' name='kword' placeholder='enter name'>
+    <button type="submit">Search</button>
+</form>
+
 <ul>
     {% for a in author_list %}
         <li>{{ a.name }}</li>
