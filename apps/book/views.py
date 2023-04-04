@@ -20,4 +20,10 @@ class BookListView(ListView):
 
     def get_queryset(self):
         key_word = self.request.GET.get('kword', '')
-        return Book.objects.list_books(key_word)
+        date_start = self.request.GET.get('date_start', '')
+        date_end = self.request.GET.get('date_end', '')
+
+        if date_start and date_end:
+            return Book.objects.list_books2(key_word, date_start, date_end)
+        else:
+            return Book.objects.list_books(key_word)

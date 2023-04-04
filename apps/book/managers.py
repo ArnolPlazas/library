@@ -1,5 +1,8 @@
+import datetime
+
 from django.db import models
 from django.db.models import Q
+
 
 class AuthorManager(models.Manager):
     """
@@ -35,5 +38,15 @@ class BookManager(models.Manager):
         result =self.filter(
             title__icontains=kword,
             release_date__range=('2000-01-01', '2005-01-01')
+             )
+        return result
+    
+    def list_books2(self, kword, date_start, date_end):
+        date_start = datetime.datetime.strptime(date_start, '%Y-%m-%d').date()
+        date_end = datetime.datetime.strptime(date_end, '%Y-%m-%d').date()
+
+        result =self.filter(
+            title__icontains=kword,
+            release_date__range=(date_start, date_end)
              )
         return result
