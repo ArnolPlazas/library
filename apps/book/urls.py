@@ -13,4 +13,9 @@ urlpatterns = [
         views.BookListView.as_view(), 
         name='book/book_list.html'
     ),
+    path(
+        'books-by-category/', 
+        views.BookListByCategoryView.as_view(), 
+        name='book/book_list_by_category.html'
+    ),
 ]

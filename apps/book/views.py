@@ -27,3 +27,10 @@ class BookListView(ListView):
             return Book.objects.list_books2(key_word, date_start, date_end)
         else:
             return Book.objects.list_books(key_word)
+
+class BookListByCategoryView(ListView):
+    context_object_name = 'book_list'
+    template_name = "book/book_list_by_category.html"
+
+    def get_queryset(self):
+        return Book.objects.list_books_by_category('1')

@@ -50,3 +50,7 @@ class BookManager(models.Manager):
             release_date__range=(date_start, date_end)
              )
         return result
+    def list_books_by_category(self, category):
+        return self.filter(
+            category__id= category
+        ).order_by('title')
