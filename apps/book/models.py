@@ -1,7 +1,7 @@
 from django.db import models
 
 # managers
-from .managers import AuthorManager
+from .managers import AuthorManager, BookManager
 
 class Author(models.Model):
     name = models.CharField(max_length=30)
@@ -39,6 +39,8 @@ class Book(models.Model):
     author = models.ManyToManyField(Author)
     release_date = models.DateField('release date')
     cover = models.ImageField(upload_to=None)
+
+    objects = BookManager()
 
     class Meta:
         verbose_name = ("Book")

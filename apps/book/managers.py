@@ -24,3 +24,16 @@ class AuthorManager(models.Manager):
     #         age__lt=60
     #          ).order_by('last_name', age)
     #     return result
+
+
+class BookManager(models.Manager):
+    """
+    managers for book model
+    """
+
+    def list_books(self, kword):
+        result =self.filter(
+            title__icontains=kword,
+            release_date__range=('2000-01-01', '2005-01-01')
+             )
+        return result

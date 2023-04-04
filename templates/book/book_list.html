@@ -1,0 +1,12 @@
+<h1>Books</h1>
+
+<form method="GET">{% csrf_token %}
+    <input type="text" id='kword' name='kword' placeholder='enter name'>
+    <button type="submit">Search</button>
+</form>
+
+<ul>
+    {% for b in book_list %}
+        <li>{{ b.title }} {{ b.release_date }}</li>
+    {% endfor %}
+</ul>
