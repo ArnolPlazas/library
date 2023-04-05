@@ -54,3 +54,13 @@ class BookManager(models.Manager):
         return self.filter(
             category__id= category
         ).order_by('title')
+
+
+class CategoryManager(models.Manager):
+    """
+    managers for category model
+    """
+    def category_by_author(self, author):
+        return self.filter(
+            category_book__author__id=author
+        ).distinct()

@@ -1,7 +1,7 @@
 from django.db import models
 
 # managers
-from .managers import AuthorManager, BookManager
+from .managers import AuthorManager, BookManager, CategoryManager
 
 class Author(models.Model):
     name = models.CharField(max_length=30)
@@ -20,7 +20,9 @@ class Author(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=30)   
+    name = models.CharField(max_length=30)
+
+    objects = CategoryManager()
 
     class Meta:
         verbose_name = ("Category")
@@ -35,7 +37,10 @@ class Category(models.Model):
     
 class Book(models.Model):
     title = models.CharField(max_length=50)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='category_book')
     author = models.ManyToManyField(Author)
     release_date = models.DateField('release date')
     cover = models.ImageField(upload_to=None)
