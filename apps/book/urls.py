@@ -6,16 +6,21 @@ urlpatterns = [
     path(
         'authors/', 
         views.AuthorListView.as_view(), 
-        name='book/author_list.html'
+        name='authors'
     ),
     path(
         'books/', 
         views.BookListView.as_view(), 
-        name='book/book_list.html'
+        name='books'
     ),
     path(
         'books-by-category/', 
         views.BookListByCategoryView.as_view(), 
-        name='book/book_list_by_category.html'
+        name='books_by_category'
+    ),
+    path(
+        'books/<pk>', 
+        views.BookDetailView.as_view(), 
+        name='book_detail'
     ),
 ]

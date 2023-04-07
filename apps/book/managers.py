@@ -1,7 +1,7 @@
 import datetime
 
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, Count
 
 
 class AuthorManager(models.Manager):
@@ -55,6 +55,17 @@ class BookManager(models.Manager):
             category__id= category
         ).order_by('title')
 
+    def add_author_book(self, book_id, author):
+        book = self.get(id=book_id)
+        book.author.add(author)
+        return book
+    
+    def remove_author_book(self, book_id, author):
+        book = self.get(id=book_id)
+        book.author.remove(author)
+        return book
+    
+
 
 class CategoryManager(models.Manager):
     """
@@ -64,3 +75,12 @@ class CategoryManager(models.Manager):
         return self.filter(
             category_book__author__id=author
         ).distinct()
+
+    def list_book_categories(self):
+        result = self.annotate(
+            num_books = Count('category_book')
+        )
+        for r in result:
+            print('********')
+            print(r, r.num_books)
+        return result

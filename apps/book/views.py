@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 # models local
 from .models import Author, Book
@@ -34,3 +34,8 @@ class BookListByCategoryView(ListView):
 
     def get_queryset(self):
         return Book.objects.list_books_by_category('1')
+
+
+class BookDetailView(DetailView):
+    model = Book
+    template_name = "book/detail_book.html"
