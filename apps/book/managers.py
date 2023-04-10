@@ -64,6 +64,12 @@ class BookManager(models.Manager):
         book = self.get(id=book_id)
         book.author.remove(author)
         return book
+    def count_num_loans(self):
+        # agregate: returns a dictionary
+        result = self.aggregate(
+            num_loans = Count('book_loan')
+        )
+        return result
     
 
 
@@ -77,6 +83,7 @@ class CategoryManager(models.Manager):
         ).distinct()
 
     def list_book_categories(self):
+        # annotate returns a querySet
         result = self.annotate(
             num_books = Count('category_book')
         )

@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Lector, Loan
+
+
+admin.site.register(Lector)
+admin.site.register(Loan)
