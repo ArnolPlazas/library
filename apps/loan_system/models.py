@@ -1,11 +1,17 @@
 from django.db import models
 
+# from local apps
 from apps.book.models import Book
+
+# from managers
+from .managers import LoanManager
+
 
 class Lector(models.Model):
     name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     nationality = models.CharField(max_length=30)
+    age = models.PositiveIntegerField(default=0)
     
 
     class Meta:
@@ -24,6 +30,7 @@ class Loan(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     load_date = models.DateField()
     return_date = models.DateField(blank=True, null=True)
+    objects = LoanManager()
     
     class Meta:
         verbose_name = ("Loan")
