@@ -26,8 +26,8 @@ class Lector(models.Model):
  
 
 class Loan(models.Model):
-    lector = models.ForeignKey(Lector, on_delete=models.CASCADE, related_name='book_loan')
-    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    lector = models.ForeignKey(Lector, on_delete=models.CASCADE)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='book_loan')
     load_date = models.DateField()
     return_date = models.DateField(blank=True, null=True)
     objects = LoanManager()

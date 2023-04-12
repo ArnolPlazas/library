@@ -71,6 +71,15 @@ class BookManager(models.Manager):
         )
         return result
     
+    def num_books_loan(self):
+        result = self.annotate(
+            num_loans = Count('book_loan')
+        )
+        for r in result:
+            print('======')
+            print(r, r.num_loans)
+        return result
+    
 
 
 class CategoryManager(models.Manager):
